@@ -18,22 +18,37 @@ from pyrogram import filters
 
 load_dotenv()
 
-API_ID = int(getenv("API_ID", ""))
+def get_int_env(key, default=None, required=False):
+    """Safely convert environment variable to int. Exit with clear message if missing/invalid."""
+    value = getenv(key, default)
+    if value is None or str(value).strip() == "":
+        if required:
+            print(f"[ERROR] - Environment variable '{key}' is missing or empty.")
+            print(f"Please set '{key}' in your deployment platform (Heroku/Render/Koyeb etc.).")
+            sys.exit(1)
+        return default
+    try:
+        return int(value)
+    except (ValueError, TypeError):
+        print(f"[ERROR] - Environment variable '{key}' must be a valid integer. Got: '{value}'")
+        sys.exit(1)
+
+API_ID = get_int_env("API_ID", required=True)
 API_HASH = getenv("API_HASH")
 
 BOT_TOKEN = getenv("BOT_TOKEN")
 
 MONGO_DB_URI = getenv("MONGO_DB_URI", None)
 
-DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", "900"))
+DURATION_LIMIT_MIN = get_int_env("DURATION_LIMIT", "900")
 
-SONG_DOWNLOAD_DURATION = int(getenv("SONG_DOWNLOAD_DURATION_LIMIT", "180"))
+SONG_DOWNLOAD_DURATION = get_int_env("SONG_DOWNLOAD_DURATION_LIMIT", "180")
 
-LOG_GROUP_ID = int(getenv("LOG_GROUP_ID", ""))
+LOG_GROUP_ID = get_int_env("LOG_GROUP_ID", required=True)
 
 MUSIC_BOT_NAME = getenv("MUSIC_BOT_NAME")
 
-OWNER_ID = int(getenv("OWNER_ID", None))
+OWNER_ID = get_int_env("OWNER_ID", required=True)
 
 HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 
@@ -53,9 +68,9 @@ SUPPORT_GROUP = getenv("SUPPORT_GROUP", "https://t.me/Alexa_Help")
 
 AUTO_LEAVING_ASSISTANT = getenv("AUTO_LEAVING_ASSISTANT", "False")
 
-AUTO_LEAVE_ASSISTANT_TIME = int(getenv("ASSISTANT_LEAVE_TIME", "11500"))
+AUTO_LEAVE_ASSISTANT_TIME = get_int_env("ASSISTANT_LEAVE_TIME", "11500")
 
-AUTO_SUGGESTION_TIME = int(getenv("AUTO_SUGGESTION_TIME", "5400"))
+AUTO_SUGGESTION_TIME = get_int_env("AUTO_SUGGESTION_TIME", "5400")
 
 AUTO_DOWNLOADS_CLEAR = getenv("AUTO_DOWNLOADS_CLEAR", "True")
 
@@ -63,9 +78,9 @@ AUTO_SUGGESTION_MODE = getenv("AUTO_SUGGESTION_MODE", "False")
 
 PRIVATE_BOT_MODE = getenv("PRIVATE_BOT_MODE", None)
 
-YOUTUBE_DOWNLOAD_EDIT_SLEEP = int(getenv("YOUTUBE_EDIT_SLEEP", "3"))
+YOUTUBE_DOWNLOAD_EDIT_SLEEP = get_int_env("YOUTUBE_EDIT_SLEEP", "3")
 
-TELEGRAM_DOWNLOAD_EDIT_SLEEP = int(getenv("TELEGRAM_EDIT_SLEEP", "5"))
+TELEGRAM_DOWNLOAD_EDIT_SLEEP = get_int_env("TELEGRAM_EDIT_SLEEP", "5")
 
 GITHUB_REPO = getenv("GITHUB_REPO", "https://github.com/TheTeamAlexa/AlexaMusic")
 
@@ -73,17 +88,17 @@ SPOTIFY_CLIENT_ID = getenv("SPOTIFY_CLIENT_ID", None)
 
 SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", None)
 
-VIDEO_STREAM_LIMIT = int(getenv("VIDEO_STREAM_LIMIT", "2"))
+VIDEO_STREAM_LIMIT = get_int_env("VIDEO_STREAM_LIMIT", "2")
 
-SERVER_PLAYLIST_LIMIT = int(getenv("SERVER_PLAYLIST_LIMIT", "50"))
+SERVER_PLAYLIST_LIMIT = get_int_env("SERVER_PLAYLIST_LIMIT", "50")
 
-PLAYLIST_FETCH_LIMIT = int(getenv("PLAYLIST_FETCH_LIMIT", "50"))
+PLAYLIST_FETCH_LIMIT = get_int_env("PLAYLIST_FETCH_LIMIT", "50")
 
-CLEANMODE_DELETE_MINS = int(getenv("CLEANMODE_MINS", "7"))
+CLEANMODE_DELETE_MINS = get_int_env("CLEANMODE_MINS", "7")
 
-TG_AUDIO_FILESIZE_LIMIT = int(getenv("TG_AUDIO_FILESIZE_LIMIT", "104857600"))
+TG_AUDIO_FILESIZE_LIMIT = get_int_env("TG_AUDIO_FILESIZE_LIMIT", "104857600")
 
-TG_VIDEO_FILESIZE_LIMIT = int(getenv("TG_VIDEO_FILESIZE_LIMIT", "1073741824"))
+TG_VIDEO_FILESIZE_LIMIT = get_int_env("TG_VIDEO_FILESIZE_LIMIT", "1073741824")
 # https://www.gbmb.org/mb-to-bytes
 
 COOKIES = getenv("COOKIES", None)

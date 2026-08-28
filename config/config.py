@@ -48,7 +48,7 @@ LOG_GROUP_ID = get_int_env("1004318913888", required=True)
 
 MUSIC_BOT_NAME = getenv("AKANKSHA")
 
-OWNER_ID = get_int_env("OWNER_ID", required=True)
+OWNER_ID = get_int_env("8841848847", required=True)
 
 HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 

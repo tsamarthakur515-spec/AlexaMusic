@@ -33,20 +33,20 @@ def get_int_env(key, default=None, required=False):
         print(f"[ERROR] - Environment variable '{key}' must be a valid integer. Got: '{value}'")
         sys.exit(1)
 
-API_ID = get_int_env("API_ID", required=True)
-API_HASH = getenv("API_HASH")
+API_ID = get_int_env("10079905", required=True)
+API_HASH = getenv("e4a5fa251e2e055f26e5c2add8401530")
 
-BOT_TOKEN = getenv("BOT_TOKEN")
+BOT_TOKEN = getenv("8800142370:AAHfJrM0uQ2c_cL-kDDj1O5Pd8bKZzLZqhc")
 
-MONGO_DB_URI = getenv("MONGO_DB_URI", None)
+MONGO_DB_URI = getenv("mongodb+srv://nubcoders:nubcoders@music.8rxlsum.mongodb.net/?retryWrites=true&w=majority&appName=music", None)
 
 DURATION_LIMIT_MIN = get_int_env("DURATION_LIMIT", "900")
 
 SONG_DOWNLOAD_DURATION = get_int_env("SONG_DOWNLOAD_DURATION_LIMIT", "180")
 
-LOG_GROUP_ID = get_int_env("LOG_GROUP_ID", required=True)
+LOG_GROUP_ID = get_int_env("1004318913888", required=True)
 
-MUSIC_BOT_NAME = getenv("MUSIC_BOT_NAME")
+MUSIC_BOT_NAME = getenv("AKANKSHA")
 
 OWNER_ID = get_int_env("OWNER_ID", required=True)
 
